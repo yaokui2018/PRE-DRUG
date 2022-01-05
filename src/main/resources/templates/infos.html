@@ -1,0 +1,303 @@
+﻿#include('head.html',{title:'', nav:'drug'})
+
+    <div class="uk-container">
+        <div class="uk-section uk-section-xsmall border-bottom">
+            <div data-uk-grid>
+                <div class="uk-width-2-3@m uk-flex uk-flex-middle">
+                    <ul class="uk-breadcrumb">
+                        <li><a href="index.html">主页</a></li>
+                        <li><span>药物检索结果</span></li>
+                        
+                    </ul>
+                </div>
+                <div class="uk-width-1-3@m">
+                    <form class="uk-search uk-search-default uk-width-1-1 awesomplete" action="/search">
+                        <a id="searchBtn" onclick="search11()" class="uk-search-icon-flip" data-uk-search-icon></a>
+                        <input id="search" name="search" class="uk-search-input uk-search-default uk-width-1-1 uk-form-large" type="search" placeholder="搜索" autocomplete="off" data-minchars="1" data-maxitems="30" >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="uk-section">
+        #if(crossReferences==null)
+        <div class="uk-text-center uk-container uk-container-xsmall">
+            <h1 class="uk-article-title">数据检索失败，请检查ID是否正确。</h1>
+        </div>
+        #else
+        <div class="uk-text-center uk-container uk-container-xsmall" style="max-width: 100%;">
+            <h1 class="uk-article-title">${pubChemInfo.title}</h1>
+        </div>
+
+        <div class="uk-container uk-container-small">
+            <hr class="uk-margin-large-top uk-margin-large-bottom">
+
+            <ul class="uk-list uk-list-large uk-margin-medium-top">
+                <li><a class="butt1on-link" href="#" target="_blank" id="drug-description"></a></li>
+            </ul>
+
+            <div class="uk-margin-large-top">
+                <h2 id="download-1">药物基本信息</h2>
+                <a href="https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi?cid=${pubChemInfo.cID}&width=500&height=500" target="_blank">
+                    <img src="https://pubchem.ncbi.nlm.nih.gov/image/imgsrv.fcgi?cid=${pubChemInfo.cID}&t=l" style="-webkit-filter: contrast(1.1);">
+                </a>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive">
+                    <tbody>
+                        <tr class="table-head">
+                            <td>分子式</td>
+                            <td>分子量</td>
+                            <td>氢键供体数</td>
+                            <td>氢键受体数</td>
+                            <td>可旋转键数</td>
+                            <td>精确质量</td>
+                            <td>同位素质量</td>
+                            <td>拓扑极表面积</td>
+                        </tr> 
+                        <tr>
+                            <td>${pubChemInfo.molecularFormula}</td>
+                            <td>${pubChemInfo.molecularWeight}</td>
+                            <td>${pubChemInfo.hBondDonorCount}</td>
+                            <td>${pubChemInfo.hBondAcceptorCount}</td>
+                            <td>${pubChemInfo.rotatableBondCount}</td>
+                            <td>${pubChemInfo.exactMass}</td>
+                            <td>${pubChemInfo.monoisotopicMass}</td>
+                            <td>${pubChemInfo.tPSA} Å²</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive">
+                    <tbody>
+                        <tr class="table-head">
+                            <td>重原子数</td>
+                            <td>形式电荷</td>
+                            <td>复杂度</td>
+                            <td>同位素原子数</td>
+                            <td>定义的原子立体中心数</td>
+                            <td>未定义的原子立体中心数</td>
+                            <td>定义的键立体中心数</td>
+                            <td>未定义的键立体中心数</td>
+                        </tr> 
+  
+                        <tr>
+                            <td>${pubChemInfo.heavyAtomCount}</td>
+                            <td>${pubChemInfo.charge}</td>
+                            <td>${pubChemInfo.complexity}</td>
+                            <td>${pubChemInfo.isotopeAtomCount}</td>
+                            <td>${pubChemInfo.definedAtomStereoCount}</td>
+                            <td>${pubChemInfo.undefinedAtomStereoCount}</td>
+                            <td>${pubChemInfo.definedBondStereoCount}</td>
+                            <td>${pubChemInfo.undefinedBondStereoCount}</td>
+                        </tr>
+    
+                    </tbody>
+                    
+                </table>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive drug-ids">
+                    <tbody>
+                        <tr class="table-head">  
+                            <td>共价键单元数</td>                          
+                            <td>DrugBank ID</td>
+                            <td>KEGG ID</td>
+                            <td>UMLS ID</td>
+                            <td>TTD ID</td>
+                            <td>PharmGKB ID</td>
+                            <td>PubChem CID</td>
+                            <td>MeSH CID</td>
+                        </tr> 
+
+                        <tr>
+                            <td>${pubChemInfo.covalentUnitCount}</td>
+                            <td>${crossReferences.drugBank}</td>
+                            <td>${crossReferences.kEGG}</td>
+                            <td>${crossReferences.uMLS}</td>
+                            <td>${crossReferences.tTD}</td>
+                            <td>${crossReferences.pharmGKB}</td>
+                            <td>${pubChemInfo.cID}</td>
+                            <td>${crossReferences.meSH}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive" style="word-break:break-all;">
+                    <tbody>
+                        <tr class="table-head">  
+                            <td>InChI （InChI Key :  ${pubChemInfo.inChIKey}）</td>
+                        </tr> 
+
+                        <tr>
+                            <td>${pubChemInfo.inChI}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive" style="word-break:break-all;">
+                    <tbody>
+                        <tr class="table-head">                  
+                            <td>Canonical SMILES</td>
+                        </tr> 
+
+                        <tr>
+                            <td>
+                                ${pubChemInfo.canonicalSMILES}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive" style="word-break:break-all;">
+                    <tbody>
+                        <tr class="table-head">                  
+                            <td>IUPAC Name</td>
+                        </tr> 
+
+                        <tr>
+                            <td>
+                                ${pubChemInfo.iUPACName}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive" style="word-break:break-all;">
+                    <tbody>
+                        <tr class="table-head">                  
+                            <td>Fingerprint 2D</td>
+                        </tr> 
+                        <tr>
+                            <td>
+                                ${pubChemInfo.fingerprint2D}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                #if(SynonymSize>0)
+                ▶ <a class="button-link" href="https://pubchem.ncbi.nlm.nih.gov/compound/${pubChemInfo.cID}#section=Depositor-Supplied-Synonyms&fullscreen=true" target="_blank">药物同义名称信息(${SynonymSize})</a><br><br>
+                #end
+                ▶ <a class="button-link" href="https://pubchem.ncbi.nlm.nih.gov/compound/${pubChemInfo.cID}#section=WHO-Essential-Medicines&fullscreen=true" target="_blank">世卫组织基本药物备注信息</a>
+            </div>
+            <div class="uk-margin-large-top">
+                <h2 id="download-1">不良反应信息</h2>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive">
+                    <tbody class="side-effect-list">
+                        <tr class="table-head">
+                            <td>副作用名称</td>
+                            <td>数据</td>
+                            <td>副作用名称</td>
+                            <td>数据</td>
+                            <td>副作用名称</td>
+                            <td>数据</td>
+                        </tr>
+                #if(sideEffectList.size()==0)
+                        <td>无数据。</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                #else
+                    <tr>
+                    #set(index=0)
+                    #for(side:sideEffectList)
+                        <td>${side.name}</td>
+                        <td>${side.attrString}</td>
+                        #set(index=index+1)
+                        #if(index%3==0)
+                        </tr>
+                        <tr>
+                        #if(index>30)
+                            #break
+                        #end
+                        #end
+                    #end
+                    </tr>
+                #end
+                    </tbody>
+                </table>
+            </div>
+            <div class="uk-margin-large-top">
+                <h2 id="download-1">相关疾病信息</h2>
+                <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive">
+                    <tbody class="disease-list">
+                        <tr class="table-head">
+                            <td class="disease-index">序号</td>
+                            <td>疾病ID</td>
+                            <td>疾病名称</td>
+                            <td>证据类型</td>
+                            <td>证据PMID</td>
+                            <td>来源库</td>
+                            <td>出版物DOI号</td>
+                        </tr>
+                        <tr class="disease-loading">
+                            <td class="disease-index"></td>
+                            <td></td>
+                            <td></td>
+                            <td>加载中...</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+#include('bottom.html')
+
+
+</body>
+<script type="text/javascript" src="http://www.yaokui.ltd/js/jquery.min.js"></script>
+<script type="text/javascript">
+     $.ajax({
+        url: "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${pubChemInfo.cID}/description/json",
+        dataType: "json",
+        type: "get",
+        success: function (result) {
+            var Information = result.InformationList.Information;
+            if (Information.length >= 2) {
+                // console.log(1, Information);
+                $("#drug-description").text(Information[1].Description)
+                $("#drug-description").attr('href', Information[1].DescriptionURL)
+
+            }
+        },
+        error: function (result) {
+            console.log("系统繁忙,请稍后再试！", result);
+            $("#drug-description").text("药物描述信息加载失败，请刷新重试！")
+        }
+    });
+    String.prototype.replaceAll = function(s1, s2) {
+        return this.replace(new RegExp(s1, "gm"), s2);
+    }
+    var Cid = ${pubChemInfo.cID};
+    $.ajax({
+        url: "https://pubchem.ncbi.nlm.nih.gov/sdq/sdqagent.cgi?infmt=json&outfmt=json&query={%22download%22:%22*%22,%22collection%22:%22ctd_chemical_disease%22,%22where%22:{%22ands%22:[{%22cid%22:%22"+Cid+"%22}]},%22order%22:[%22relevancescore,desc%22],%22start%22:1,%22limit%22:10000000}",
+        dataType: "json",
+        type: "get",
+        success: function (result) {
+            $(".disease-loading").hide();
+            if(result.length==0){
+                $(".disease-list").append("<tr><td>无数据。</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>")
+            }
+            else{
+                for(let i in result){
+                    var trStr = '<tr class="disease-info"><td class="disease-index">'+(Number(i)+1)+'</td><td>'+result[i].diseaseextid+'</td><td>'+result[i].diseasename+'</td><td>'+result[i].directevidence+'</td><td>'+result[i].pmids.toString().replaceAll(",","<br>")+'</td><td>'+result[i].diseasesrcdb+'</td><td>'+result[i].dois.toString().replaceAll(",","、<br>")+'</td></tr>'
+                    $(".disease-list").append(trStr)
+                }
+            }
+        },
+        error: function (result) {
+            console.log("系统繁忙,请稍后再试！", result);
+            $("#drug-description").text("药物描述信息加载失败，请刷新重试！")
+        }
+    });
+
+</script>
+
+#end
+#include('mobile.html',{nav:'drug'})
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		#include('head.html',{title:'搜索结果'})
+		<style type="text/css">
+			.sea-inpleft{
+				margin-left: 15px;
+			}
+			html{
+				height: auto;
+			}
+		</style>
+	</head>
+	<body>
+	<div class="search-input">
+		<a href="javascript:history.back()" id="back"><i class="fl am-success am-icon-chevron-left "></i></a>
+		<script>
+            if (travel.checkApp()) {
+                $("#back").remove();
+            }
+		</script>
+		<input type="text" value="${s}" class="sea-inpleft searchInput" placeholder="请输入您搜索的内容" />
+		<a onclick="mysearch()"><i class="fr am-success am-icon-search "></i></a>
+	</div>#include('header.html')
+
+		<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default title" >
+		    <h2 class="am-titlebar-title ">   搜索结果 </h2>
+		</div>
+	    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3 am-avg-lg-4 am-gallery-default product">
+			#for(view : cViewList)
+			<li>
+				<div class="am-gallery-item">
+					<a href="detail?vId=${view.vId}">
+						<img src="/images/picture/${view.vEat}"  class="viewpic" alt=""/>
+						<h3 class="am-gallery-title">${view.vName}</h3>
+					</a>
+				</div>
+			</li>
+			#end
+			#if(cViewList.size()==0)
+			<p style="color: #dedede;font-style: italic;text-align: center;">暂无数据</p>
+			#end
+		 </ul>
+
+	</body>
+	<script type="text/javascript">
+
+        function mysearch() {
+            var a = $(".searchInput").val();
+            if(a!="")
+                location.href="searchResult?s="+a;
+        }
+        $("img.viewpic").css("height",$("img.viewpic").width());
+	</script>
+</html>

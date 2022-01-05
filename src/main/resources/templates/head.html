@@ -1,0 +1,63 @@
+<!--head-->
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>${title==''?'基于知识图谱的药物信息检索系统':title}</title>
+	<link rel="shortcut icon" type="image/png" href="/img/favicon.png" >
+	<link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700" rel="stylesheet">
+	<link rel="stylesheet" href="/css/main.css" />
+	<script src="/js/main.js"></script>
+	<style type="text/css">
+		.uk-container-small {
+			max-width: 1250px;
+		}
+		.table-head{
+			color: black;
+			font-weight: 500;
+		}
+		.disease-info td{
+			word-break:break-all;
+			min-width: 80px;
+		}
+		.drug-ids td{
+			word-break:break-all;
+			min-width: 100px;
+		}
+		td.disease-index{
+			min-width: 40px;
+		}
+
+	</style>
+</head>
+
+<body>
+
+<nav class="border-bottom" style="background: url(/img/head.png);">
+	<div class="uk-container">
+		<div data-uk-navbar>
+			<div class="uk-navbar-left">
+				<a class="uk-navbar-item uk-logo uk-text-small" href="/index">PRE-DRUG</a>
+			</div>
+			<div class="uk-navbar-right">
+
+				<ul class="uk-navbar-nav uk-visible@m">
+					<li class="${nav=='home'?'uk-active':''}"><a href="/index">主页</a></li>
+					<li class="${nav=='faq'?'uk-active':''}"><a href="/">Faq</a></li>
+					<!-- <li ><a href="blog.html">Blog</a></li> -->
+					<!-- <li ><a href="changelog.html">Changelog</a></li> -->
+					<li class="${nav=='drug'?'uk-active':''}"><a href="/search">药物信息</a></li>
+					<!-- <li ><a href="contact.html">Contact</a></li> -->
+				</ul>
+
+				<div class="uk-navbar-item uk-visible@m">
+					<a  class="uk-button uk-button-primary">平台介绍</a>
+				</div>
+
+				<a class="uk-navbar-toggle uk-hidden@m" href="#offcanvas" data-uk-navbar-toggle-icon data-uk-toggle></a>
+			</div>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,104 @@
+﻿#include('head.html',{title:'', nav:'search'})
+<style>
+    #drug-name {
+        font-size: x-large;
+        margin-bottom: -18px;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        -webkit-text-overflow: ellipsis;
+        -moz-text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .uk-child-width-1-2\@s .result-list{
+        width: calc(50% - 20px);
+        margin: 20px 10px;
+    }
+</style>
+<div class="uk-background-muted" style="margin-top:15px;">
+    <div class="uk-container">
+        <div class="uk-margin">
+            <form class="uk-search uk-search-default uk-width-1-1 awesomplete" action="/search">
+                <a id="searchBtn" onclick="search11()" class="uk-search-icon-flip" data-uk-search-icon></a>
+                <input id="search" value="${search}" name="search"
+                       class="uk-search-input uk-search-default uk-width-1-1 uk-form-large" type="search"
+                       placeholder="输入药物/疾病名称" autocomplete="off" data-minchars="1" data-maxitems="30">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<section class="uk-section uk-background-muted">
+    <div class="uk-container uk-text-center">
+
+        #if(size<0)
+        <h1 class="uk-heading-primary uk-margin-medium-bottom"
+            data-uk-scrollspy="cls: uk-animation-slide-bottom-medium;">输入药物名称开始搜索</h1>
+        #else
+        <h1 class="uk-heading-primary uk-margin-medium-bottom"
+            data-uk-scrollspy="cls: uk-animation-slide-bottom-medium;">搜索结果</h1>
+        <br>
+        #if(size==0)
+        <p style="text-align: center">无匹配结果。</p>
+        #elseif(size==1000)
+        <script>
+            window.location.href = "/infos/${drugList[0].dkg_id}";
+        </script>
+        #else
+        <div class="uk-grid-collapse uk-child-width-1-2@s uk-grid-match uk-text-center" data-uk-grid
+             data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; delay: 80">
+
+            #for(drug:drugList)
+            <div class="result-list">
+                <a href="/infos/${drug.dkg_id}" target="_blank" class="uk-card card-box uk-card-body uk-border-rounded"
+                   style="border: 1px solid;">
+                    <p class="uk-margin-medium-top" id="drug-name" title="${drug.name}">${drug.name}</p>
+                    <p class="uk-margin-medium-top" style="font-size: medium;">${drug.dkg_id}</p>
+                </a>
+            </div>
+            #end
+
+        </div>
+
+    </div>
+</section>
+
+
+<footer class="uk-section uk-section-muted" style="padding-bottom:10px;">
+    #include('bottom.html')
+</footer>
+#end
+#end
+#include('mobile.html',{nav:'drug'})
+
+<script src="style/js/awesomplete.js"></script>
+
+<!--<script>-->
+<!--	var input = document.getElementById("search");-->
+
+<!--	input.addEventListener("awesomplete-selectcomplete", function(e) {-->
+<!--		window.location.href = e.text.value;-->
+<!--	}, false);-->
+
+<!--	new Awesomplete(input, {-->
+<!--		container: function (tag) {-->
+<!--			return ".awesomplete";-->
+<!--		},-->
+<!--		autoFirst: true,-->
+<!--		list: [-->
+<!--			{ label: "How do I enable payment gateway?", 					value: "article.html" },-->
+<!--			{ label: "What happens if I clear cache?", 						value: "article1.html" },-->
+<!--			{ label: "Which payment methods do you offer?", 				value: "article.html" },-->
+<!--			{ label: "How long does it take to propagate DNS settings?", 	value: "article.html" },-->
+<!--			{ label: "How can I force SSL certificate?", 					value: "article.html" }-->
+<!--		],-->
+<!--		replace: function(suggestion) {-->
+<!--			this.input.value = suggestion.label;-->
+<!--		}-->
+<!--	});-->
+<!--</script>-->
+
+</body>
+
+</html>

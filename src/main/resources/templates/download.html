@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>APP下载</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="format-detection" content="telephone=no" />
+	<!--<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>-->
+	<!--<link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">-->
+	<!--<script src="/layuiadmin/layui/layui.js"></script>-->
+</head>
+<body>
+<script type="text/javascript">
+	#if (update!=null&&update.uDownload!="")
+    location.href="${update.uDownload}";
+	#else
+    location.href="/index";
+	#end
+</script>
+</body>
+</html>
