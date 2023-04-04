@@ -6,13 +6,10 @@ import cn.bhshare.kg.services.IIndexService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import netscape.javascript.JSObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -22,58 +19,12 @@ public class IndexServiceImpl implements IIndexService {
     @Resource
     Neo4jDao neo4jDao;
 
-//	@Autowired
-//    CUserMapper userMapper;
-//	@Autowired
-//    CSchoolMapper schoolMapper;
-//	@Autowired
-//    CViewMapper viewMapper;
-//	@Autowired
-//    CPictureMapper pictureMapper;
-//	@Autowired
-//    CCommentMapper commentMapper;
-//	@Autowired
-//	CIndexMapper indexMapper;
-//	@Autowired
-//	CUpdateMapper updateMapper;
-
-
-    SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    SimpleDateFormat df3 = new SimpleDateFormat("yyyy-MM-dd");
-    String pathPic = this.getClass().getResource("/").getPath() + "static/images/picture/";
-
     /**
      * 主页
      */
     @Override
     public void index(HttpServletRequest request) {
-        //景点推荐-8个
-//		CViewExample cViewExample = new CViewExample();
-//		cViewExample.or().andVFlagNotEqualTo(0).andVFlagNotEqualTo(4);
-//		cViewExample.setOrderByClause("v_hot desc");
-//		List<CView> cViewList = viewMapper.selectByExample(cViewExample);
-//		int i = 0;
-//		for (CView cView : cViewList){
-//			if (i>7)
-//				break;
-//			CPictureExample cPictureExample = new CPictureExample();
-//			cPictureExample.or().andPFlagEqualTo(1).andPVsidEqualTo(cView.getvId());
-//			List<CPicture> pictureList = pictureMapper.selectByExample(cPictureExample);
-//			if (pictureList.size()!=0)
-//				cViewList.get(i).setvEat(pictureList.get(0).getpFilename());//将图片名暂存eat字段
-//			else
-//				cViewList.get(i).setvEat(null);
-//			i++;
-//		}
-//		//轮播图
-//		CIndexExample cIndexExample = new CIndexExample();
-//		cIndexExample.or().andIDisplayEqualTo(1);
-//		cIndexExample.setOrderByClause("i_index");
-//		List<CIndex> cIndexList = indexMapper.selectByExample(cIndexExample);
-//
-//		request.setAttribute("cViewList",cViewList.subList(0,cViewList.size()<8?cViewList.size():8));
-//		request.setAttribute("cIndexList",cIndexList);
+
     }
 
     @Override
@@ -169,7 +120,7 @@ public class IndexServiceImpl implements IIndexService {
 
     @Override
     public void getSearchByDrugName(HttpServletRequest request, String search) {
-        if (search==null || search.equalsIgnoreCase("")){
+        if (search == null || search.equalsIgnoreCase("")) {
             request.setAttribute("size", -1);
             return;
         }

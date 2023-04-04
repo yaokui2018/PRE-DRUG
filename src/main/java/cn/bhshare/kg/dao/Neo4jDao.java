@@ -2,7 +2,6 @@ package cn.bhshare.kg.dao;
 
 import cn.bhshare.kg.models.Drug;
 import cn.bhshare.kg.models.SideEffect;
-import cn.bhshare.kg.models.SideEffectAttr;
 import org.neo4j.driver.v1.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class Neo4jDao {
 
     private Driver createDrive() {
         if (GraphDatabaseDriver == null) {
-            GraphDatabaseDriver = GraphDatabase.driver("bolt://localhost:7687", AuthTokens.basic("neo4j", "1"));
+            GraphDatabaseDriver = GraphDatabase.driver("bolt://10.40.18.101:7687", AuthTokens.basic("neo4j", "1"));
         }
         return GraphDatabaseDriver;
     }
@@ -42,7 +41,7 @@ public class Neo4jDao {
         Session session = driver.session();
         StatementResult result = session.run("MATCH (a:Drug) where {name} in a.name or {name} in a.Synonym or a.PubChemInfo contains {info} " +
                         " RETURN a.dkg_id as dkg_id, a.name as name",
-                parameters("name", name, "info", "\"CID\": "+name+","));
+                parameters("name", name, "info", "\"CID\": " + name + ","));
         List<Drug> list = new ArrayList<>();
         while (result.hasNext()) {
             Drug drug = new Drug();
@@ -103,7 +102,7 @@ public class Neo4jDao {
 //            flag = true;
             sideEffect = new SideEffect();
             Record record = result.next();
-            sideEffect.setName(String.valueOf(record.get("name")).replace("[\"","").replace("\"]",""));
+            sideEffect.setName(String.valueOf(record.get("name")).replace("[\"", "").replace("\"]", ""));
             try {
                 sideEffect.setAttrString(record.get("attribution").asString());
             } catch (Exception e) {
@@ -118,93 +117,4 @@ public class Neo4jDao {
         closeConnect(session, driver);
         return sideEffectList;
     }
-
-//    /**
-//     * 用户登录
-//     * @param users
-//     * @return
-//     */
-//    @Override
-//    public Users login(Users users){
-//        return this.selectOne(mapperNamespace + ".login",users);
-//    }
-//
-//    /**
-//     * 登录更新ip等信息
-//     * @param users
-//     * @return
-//     */
-//    @Override
-//    public Boolean loginUpdate(Users users){
-//        try {
-//            this.update(mapperNamespace+".loginUpdate",users,"");
-//            return true;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    /**
-//     * 用户注册
-//     * @param users
-//     * @return
-//     */
-//    @Override
-//    public boolean signin(Users users){
-//        try {
-//            this.insert(mapperNamespace+".signin",users,"");
-//            return true;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean checkEmail(String email){
-//        try {
-//            return this.selectOne(mapperNamespace+".checkEmail", email)!=null;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public Users lookUser(int id) {
-//        try {
-//            return this.selectOne(mapperNamespace+".lookUser",id);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean editUser(Users users) {
-//        try {
-//            this.update(mapperNamespace+".editUser",users,"");
-//            return  true;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean deleteUser(int id) {
-//        return  this.delete(mapperNamespace+".deleteUser",id)>0;
-//    }
-//
-//    @Override
-//    public List<Users> getUsersList() {
-//        try {
-//            List<Users> list = this.selectList(mapperNamespace+".getUsersList");
-//            return  list;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 }

@@ -1,0 +1,229 @@
+﻿#include('head.html',{title:'', nav:'search'})
+<style>
+    #drug-name {
+        font-size: x-large;
+        margin-bottom: -18px;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        -webkit-text-overflow: ellipsis;
+        -moz-text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .uk-child-width-1-2\@s .result-list{
+        width: calc(50% - 20px);
+        margin: 20px 10px;
+    }
+</style>
+<div class="uk-background-muted" style="margin-top:15px;">
+    <div class="uk-container">
+        <div class="uk-margin">
+            <form class="uk-search uk-search-default uk-width-1-1 awesomplete" action="/search-cpi">
+                <a id="searchBtn" onclick="search11()" class="uk-search-icon-flip" data-uk-search-icon></a>
+                <input id="search" value="${search}" name="search"
+                       class="uk-search-input uk-search-default uk-width-1-1 uk-form-large" type="search"
+                       placeholder="输入蛋白质名称" autocomplete="off" data-minchars="1" data-maxitems="30">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<section class="uk-section uk-background-muted">
+    <div class="uk-container uk-text-center">
+
+        #if(search == null)
+        <h1 class="uk-heading-primary uk-margin-medium-bottom"
+            data-uk-scrollspy="cls: uk-animation-slide-bottom-medium;">输入蛋白质名称开始预测</h1>
+        #else
+        <div>
+            <h2 id="CPI">CPI 预测</h2>
+            <table class="uk-table uk-table-divider uk-table-middle uk-table-justify uk-table-responsive">
+                <tbody class="cpi-list">
+                <tr class="table-head">
+                    <td class="cpi-index">序号</td>
+                    <td>蛋白质靶标</td>
+                    <td>化合物</td>
+                    <td>存在相互作用</td>
+                    <td>置信度</td>
+                </tr>
+<!--                <tr class="cpi-loading">-->
+<!--                    <td>加载中...</td>-->
+<!--                    <td></td>-->
+<!--                    <td></td>-->
+<!--                    <td></td>-->
+<!--                    <td></td>-->
+<!--                </tr>-->
+                <tr class="cpi-loading">
+                    <td>1</td>
+                    <td>egfr</td>
+                    <td>NCCCn3ccc4c(c2ccnc(Nc1cccc(OC(F)(F)C(F)F)c1)n2)cccc34</td>
+                    <td>是</td>
+                    <td>0.89</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>2</td>
+                    <td>egfr</td>
+                    <td>C6CN(CCNCc5ccc(c4cc3nccc(Nc2ccc1[nH]ccc1c2)c3s4)cc5)CCN6</td>
+                    <td>是</td>
+                    <td>0.89</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>3</td>
+                    <td>egfr</td>
+                    <td>NCCn5cc(c4cc(c2cc1ccccc1s2)c3[nH]ncc3c4)c6nc(N)ncc56</td>
+                    <td>是</td>
+                    <td>0.89</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>4</td>
+                    <td>egfr</td>
+                    <td>C6CCN(CCOc5ccc(c3oc2ncnc(NCCN1CCNCC1)c2c3c4ccccc4)cc5)C6</td>
+                    <td>是</td>
+                    <td>0.89</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>5</td>
+                    <td>egfr</td>
+                    <td>NC6CCN(Cc4ccn5ncnc(Nc3ccc2n(Cc1ccccn1)ncc2c3)c45)CC6</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>6</td>
+                    <td>egfr</td>
+                    <td>NC5CCN(Cc3ccn4ncnc(Nc2ccc(OCc1cccc(F)c1)c(Cl)c2)c34)CC5</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>7</td>
+                    <td>egfr</td>
+                    <td>NC5CCN(Cc3ccn4ncnc(Nc2ccc(OCc1ccccn1)c(Cl)c2)c34)CC5</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>8</td>
+                    <td>egfr</td>
+                    <td>CN4CCN(CCCCNc3ncc2cc(c1c(Cl)cccc1Cl)c(=O)n(C)c2n3)CC4</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>9</td>
+                    <td>egfr</td>
+                    <td>NCC6CCN(Cc4ccn5ncnc(Nc3ccc2n(Cc1cccc(F)c1)ncc2c3)c45)CC6</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>10</td>
+                    <td>egfr</td>
+                    <td>NC6CCN(Cc4ccn5ncnc(Nc3ccc2n(Cc1ccncc1)ncc2c3)c45)CC6</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>11</td>
+                    <td>egfr</td>
+                    <td>CN4CCN(CCCNc3cc2ncnc(Nc1cccc(Br)c1)c2cn3)CC4</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>12</td>
+                    <td>egfr</td>
+                    <td>CN4CCN(NCCCNc3cc2c(Nc1cccc(Br)c1)ncnc2cn3)CC4</td>
+                    <td>是</td>
+                    <td>0.88</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>13</td>
+                    <td>egfr</td>
+                    <td>CN4CCN(CCC#CC(=O)Nc3cc2c(Nc1ccc(F)c(Cl)c1)ncnc2cn3)CC4</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>14</td>
+                    <td>egfr</td>
+                    <td>NC5CCN(Cc3ccn4ncnc(Nc2ccc(OCc1cnccn1)c(Cl)c2)c34)CC5</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>15</td>
+                    <td>egfr</td>
+                    <td>Cc6cncc(Cn4ncc5cc(Nc2ncnn3ccc(CN1CCC(N)CC1)c23)ccc45)c6</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>16</td>
+                    <td>egfr</td>
+                    <td>COc3cc2ncnc(Nc1ccc(F)c(Cl)c1)c2cc3OCCN4CCN(C)CC4</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>17</td>
+                    <td>egfr</td>
+                    <td>CN5CCN(CCCOc4cc(OC1CCOCC1)c3c(Nc2ccc(F)c(Cl)c2)ncnc3c4)CC5</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>18</td>
+                    <td>egfr</td>
+                    <td>NC5CCN(Cc3ccn4ncnc(Nc2ccc(OCc1ccccn1=O)c(Cl)c2)c34)CC5</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>19</td>
+                    <td>egfr</td>
+                    <td>Cc5cncc(COc4ccc(Nc2ncnn3ccc(CN1CCC(N)CC1)c23)cc4Cl)c5</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>20</td>
+                    <td>egfr</td>
+                    <td>COc3cc2c(Nc1ccc(Cl)cc1F)ncnc2cc3OCCN4CCN(C)CC4</td>
+                    <td>是</td>
+                    <td>0.87</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>21</td>
+                    <td>egfr</td>
+                    <td>CN4CCN(CCCOc3cc2ncnc(Nc1cccc(Br)c1)c2cc3NC(=O)C=C)CC4</td>
+                    <td>是</td>
+                    <td>0.86</td>
+                </tr>
+                <tr class="cpi-loading">
+                    <td>22</td>
+                    <td>egfr</td>
+                    <td>CN5CCN(CCCNc4ncc3cc(c1c(Cl)cccc1Cl)c(NC(=O)NCc2ccccc2)nc3n4)CC5</td>
+                    <td>是</td>
+                    <td>0.86</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        #end
+    </div>
+</section>
+
+
+<footer class="uk-section uk-section-muted" style="padding-bottom:10px;">
+    #include('bottom.html')
+</footer>
+#include('mobile.html',{nav:'drug'})
+
+<script src="style/js/awesomplete.js"></script>
+
+
+</body>
+
+</html>

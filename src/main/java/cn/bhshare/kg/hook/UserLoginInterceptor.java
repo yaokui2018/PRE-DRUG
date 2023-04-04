@@ -20,11 +20,11 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 //        得到对象
         Object user = CookieUtils.getCookie("user");
 //        判断对象是否存在
-        if(user!=null){
+        if (user != null) {
             return true;
-        }else{
+        } else {
 //            不存在则跳转到登录页
-            httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/login?uri="+httpServletRequest.getRequestURI());
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login?uri=" + httpServletRequest.getRequestURI());
             return false;
         }
     }
